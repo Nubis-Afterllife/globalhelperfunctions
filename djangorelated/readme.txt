@@ -1,0 +1,1 @@
+This functions will be related to django framework written in python3 (3-.10.12)
