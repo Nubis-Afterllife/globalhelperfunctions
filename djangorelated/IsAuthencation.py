@@ -20,8 +20,9 @@ class CustomIsAuthenticated(BasePermission):
             return False
         verify_token_url = f'{Domain}/Auth/verifytoken/'
         payload = {'token': token}
+        headers = { 'Authorization': f'Bearer {token}', 'Content-Type': 'application/json', }
         try:
-            response = requests.post(verify_token_url, data=payload)
+            response = requests.post(verify_token_url,headers=headers)
         except Exception as e:
             return False
         else:            
@@ -29,4 +30,5 @@ class CustomIsAuthenticated(BasePermission):
                 request.user = json.loads(response.text)
                 return True
             else:
+                print("response",response)
                 return False
